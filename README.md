@@ -27,7 +27,7 @@ checks are below.
 | What it checks | Project | Status |
 |---|---|---|
 | The spec: is the request clear enough to build and verify? | [**AI-PRD-Devin**](https://github.com/hidevinliu/AI-PRD-Devin), a fork of [qiaomu-ai-prd](https://github.com/joeseesun/qiaomu-ai-prd). Writes a full PRD, a short spec or a short plan depending on task size, and can output an acceptance contract for red-green-mode. | Released |
-| The tests: did the agent pass them by editing them? | [**red-green-mode**](https://github.com/hidevinliu/red-green-mode) scans the diff for skipped tests, deleted assertions and suppressed errors. It blocks all 55 cheat techniques in my test set, and in its PR-review mode it blocks 3.3% of 630 merged pull requests. Method and data are in [`bench/`](https://github.com/hidevinliu/red-green-mode/tree/main/bench). It also flags fixes that only change behaviour at the tested inputs: 0 of 112 correct fixes flagged, 26 of 38 overfit ones caught on QuixBugs. | Released |
+| The tests and the fix: did the agent make the tests pass honestly? | [**red-green-mode**](https://github.com/hidevinliu/red-green-mode) scans the diff for skipped tests, deleted assertions and suppressed errors (all 55 cheat techniques in my test set blocked; 3.7% of 630 merged PRs blocked in review mode). It also flags fixes that only change behaviour at the tested inputs or hide a special case behind an input feature (31 of 38, and 17 of 21 on held-out data, with 0 correct fixes flagged), and assertions rewritten to be provably weaker. Rules for the last two checks were published before they were scored. Method and data are in [`bench/`](https://github.com/hidevinliu/red-green-mode/tree/main/bench). | Released |
 | The test itself: does it fail when the code breaks? | [**mutation-check**](https://github.com/hidevinliu/red-green-mode/tree/main/skills/mutation-check) breaks the code on purpose and checks that the test goes red. Part of red-green-mode. | Released |
 | Loop memory, and checking an agent's "done" against git history | — | In progress, not released |
 
@@ -64,7 +64,7 @@ checks are below.
 | 检查什么 | 项目 | 状态 |
 |---|---|---|
 | 需求：要求清楚到能做、能验收吗？ | [**AI-PRD-Devin**](https://github.com/hidevinliu/AI-PRD-Devin)，基于 [qiaomu-ai-prd](https://github.com/joeseesun/qiaomu-ai-prd) 改的。按任务大小写完整 PRD、短规格或几行方案，可以产出给 red-green-mode 用的验收契约。 | 已发布 |
-| 测试：agent 是不是靠改测试过关的？ | [**red-green-mode**](https://github.com/hidevinliu/red-green-mode)，扫描改动，找出被跳过的测试、被删的断言、被屏蔽的报错。我整理的 55 种作弊手法全部能拦下；审 PR 模式下，在 630 个已合并的 PR 中拦了 3.3%。方法和数据在 [`bench/`](https://github.com/hidevinliu/red-green-mode/tree/main/bench)。也能识别"只在被测输入上改变行为"的修复：在 QuixBugs 上，112 个正确修复误报 0 个，38 个过拟合补丁抓到 26 个。 | 已发布 |
+| 测试和修复：agent 是不是老老实实让测试通过的？ | [**red-green-mode**](https://github.com/hidevinliu/red-green-mode)，扫描改动，找出被跳过的测试、被删的断言、被屏蔽的报错（我整理的 55 种作弊手法全部拦下；审 PR 模式下 630 个已合并 PR 拦了 3.7%）。它还能识别只在被测输入上改变行为、或用输入特征伪装的修复（38 个抓到 31 个，独立数据 21 个抓到 17 个，正确修复零误报），以及被改得更弱的断言。后两项检查的规则都是先公开、再评测。方法和数据在 [`bench/`](https://github.com/hidevinliu/red-green-mode/tree/main/bench)。 | 已发布 |
 | 测试本身：代码坏了它会失败吗？ | [**mutation-check**](https://github.com/hidevinliu/red-green-mode/tree/main/skills/mutation-check)，故意把代码改坏，检查测试会不会变红。属于 red-green-mode 的一部分。 | 已发布 |
 | 循环记忆，以及拿 git 记录核对 agent 说的"做完了" | — | 进行中，未发布 |
 
